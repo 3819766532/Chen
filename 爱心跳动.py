@@ -32,6 +32,7 @@ screen_height = root.winfo_screenheight()
 center_x = screen_width // 2
 center_y = screen_height // 2
 new_popup_running = False
+
 def get_love_points(n, scale=LOVE_SCALE):
     raw_pts = []
     for i in range(n):
@@ -55,6 +56,7 @@ def get_love_points(n, scale=LOVE_SCALE):
         win_y = int(offset_y + py - WINDOW_HEIGHT // 2)
         final_pts.append((win_x, win_y))
     return final_pts
+
 def make_window(base_x, base_y, is_love_phase=False):
     x = base_x + random.randint(-STACK_OFFSET, STACK_OFFSET)
     y = base_y + random.randint(-STACK_OFFSET, STACK_OFFSET)
@@ -83,6 +85,7 @@ def make_window(base_x, base_y, is_love_phase=False):
     label.pack(expand=True, fill=tk.BOTH, padx=4, pady=4)
     windows.append(win)
     return win
+
 def close_all():
     for w in windows[:]:
         try:
@@ -92,6 +95,7 @@ def close_all():
     windows.clear()
     root.quit()
     sys.exit()
+
 def clear_love_windows():
     for w in windows[:]:
         try:
@@ -99,6 +103,7 @@ def clear_love_windows():
         except:
             pass
     windows.clear()
+
 def start_random_pop():
     global new_popup_running
     if new_popup_running:
@@ -114,6 +119,7 @@ def start_random_pop():
         make_window(rx, ry, is_love_phase=False)
         root.after(NEW_POPUP_INTERVAL, add_one)
     add_one()
+
 def draw_heart_step_by_step(points, index=0):
     if index >= len(points):
         root.after(LOVE_DISPLAY_TIME, lambda: (clear_love_windows(), start_random_pop()))
@@ -121,6 +127,7 @@ def draw_heart_step_by_step(points, index=0):
     x, y = points[index]
     make_window(x, y, is_love_phase=True)
     root.after(LOVE_CREATE_DELAY, lambda: draw_heart_step_by_step(points, index + 1))
+
 if __name__ == "__main__":
     heart_points = get_love_points(LOVE_WORD_COUNT)
     draw_heart_step_by_step(heart_points)

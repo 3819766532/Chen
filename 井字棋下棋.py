@@ -20,16 +20,13 @@ def show_board(board):
  {board[6]} | {board[7]} | {board[8]}
 """)
 
-# 必赢AI：堵你+直接赢
 def cheat_ai(board):
-    # 电脑先赢
     for i in range(9):
         if board[i] == ' ':
             board[i] = 'O'
             if check_win(board, 'O'):
                 return
             board[i] = ' '
-    # 堵玩家
     for i in range(9):
         if board[i] == ' ':
             board[i] = 'X'
@@ -37,11 +34,9 @@ def cheat_ai(board):
                 board[i] = 'O'
                 return
             board[i] = ' '
-    # 没机会就下中间
     if board[4] == ' ':
         board[4] = 'O'
         return
-    # 随便下
     for i in range(9):
         if board[i] == ' ':
             board[i] = 'O'
@@ -58,15 +53,12 @@ def check_win(board, p):
             return True
     return False
 
-# 主程序
 board = [' '] * 9
 print("🔥 超级井字棋 🔥")
 time.sleep(1)
 
 while True:
     show_board(board)
-    
-    # 玩家下棋
     while True:
         try:
             pos = int(input("输入位置(1-9)：")) - 1
@@ -76,17 +68,12 @@ while True:
                 print("位置无效！")
         except:
             print("请输入数字！")
-    
     board[pos] = 'X'
-    
     if check_win(board, 'X'):
         show_board(board)
         print("你赢了？不可能！")
         break
-    
-    # AI必赢下棋
     cheat_ai(board)
-    
     if check_win(board, 'O'):
         show_board(board)
         print("💻 电脑赢了！")

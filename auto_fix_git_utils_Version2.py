@@ -29,7 +29,6 @@ class GitUtils:
         patch_text = patch_obj.get("patch_text")
         if not patch_text:
             return False
-        # write patch to temp file and git apply
         fd, path = tempfile.mkstemp(suffix=".patch")
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(patch_text)

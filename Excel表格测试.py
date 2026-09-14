@@ -7,28 +7,17 @@
 import openpyxl
 from openpyxl import Workbook
 
-# 1. 创建一个新的工作簿
 wb = Workbook()
-
-# 2. 激活默认的工作表
 ws = wb.active
 ws.title = "测试数据"
-
-# 3. 写入表头
 ws.append(["姓名", "年龄", "城市"])
-
-# 4. 写入几行数据
 data = [
     ["张三", 25, "北京"],
     ["李四", 30, "上海"],
     ["王五", 28, "广州"]
 ]
-
 for row in data:
     ws.append(row)
-
-# 5. 读取并打印第一行数据，验证是否写入成功
 print(f"读取到的第一个数据是: {ws['A1'].value}")
 print(f"读取到的第二行数据是: {ws['A2'].value}, {ws['B2'].value}, {ws['C2'].value}")
-
 print("\n--- openpyxl 测试通过！Excel 功能已就绪 ---")
